@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,700;0,900;1,100&display=swap');
 
+body, div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-weight: bold;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    border: solid blue 1px;
+}
+
+.calcHolder{
+    flex-direction: column;
+    width: 600px;
+}
 .title{
     color:blue;
     font-weight: bold;

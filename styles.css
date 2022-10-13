@@ -2,17 +2,123 @@
 
 body, div {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
     font-weight: bold;
     font-size: 24px;
     font-family: 'Roboto', sans-serif;
-    border: solid blue 1px;
+    box-sizing: border-box;
+}
+
+div {
+    /* margin: 2px; */
+    text-align: center;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+body{
+    flex-direction: column;
+    align-items: center;
 }
 
 .calcHolder{
+    border-radius: 8px;
+    justify-content: stretch;
+    align-items: stretch;
+    /* background-color: aqua; */
     flex-direction: column;
-    width: 600px;
+    padding: 4px;
+    gap: 4px;
+    width: 382px;
+    height: 551px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.display{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    /* margin: 4px; */
+    padding: 8px;
+    justify-content: right;
+    background-color: lightblue;
+    /* width: 400px; */
+    width: 100%;
+    height: 15%;
+}
+
+.mainButtons{
+    justify-content: center;
+    width: 100%;
+    /* padding: 4px;
+    gap: 2px; */
+    /* align-items: baseline; */
+    /* justify-content: left; */
+    background-color: azure;
+}
+.numbersHolder, .specialThree{
+    gap: 4px;
+    flex-grow: 3;
+    flex-wrap: wrap;
+    /* justify-content: center;
+    align-items: center; */
+    /* justify-content: space-evenly; */
+    /* padding: 8px; */
+    width: 75%;
+    /* height: 300px; */
+}
+.numbers{
+    justify-content: center;
+    text-align: center;
+    /* margin: 2px; */
+    border-radius: 12px;
+    /* border-left: solid grey 2px;
+    border-bottom: solid grey 2px; */
+    background-color: peachpuff;
+    /* border-right: solid grey 1px;
+    border-top: solid grey 1px; */
+    width: 90px;
+    height: 90px;
+}
+.zero, .decimal, .equals{
+    justify-content: center;
+    /* margin: 2px; */
+    border-radius: 12px;
+    background-color: rgb(173, 206, 235);
+    /* width: 25% */
+    width: 90px;
+    height: 90px;
+}
+.rightOperatorsHolder{
+    gap: 4px 0px;
+    /* background-color: bisque; */
+    flex-direction: column;
+    flex-grow: 1;
+    /* width: 100px; */
+}
+.rightOperators{
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background-color: blueviolet;
+    /* width: 100%;
+    height: 100%; */
+    width: 90px;
+    height: 90px;
+}
+
+.backspace, .clear {
+    /* margin: 2px; */
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: brown;
+    /* width: 200px; */
+}
+
+.bottomButtons {
+    gap: 4px;
+    height: 15%;
 }
 .title{
     color:blue;

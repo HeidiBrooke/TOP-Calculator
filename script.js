@@ -47,12 +47,25 @@ function operate(operator, num1, num2){
 // const currentNumber;
 // const display;
 //display update function
+let displayValue = '0';
+
 function displayUpdate(e){
     let num = e.target.innerHTML;
     console.log(num);
     let display = document.getElementById('display');
     console.log(display);
-    display.textContent = num;
+    if(displayValue === '0'){
+        console.log("replacing 0");
+        displayValue = num;
+        display.textContent = displayValue;
+        return
+    }
+    {
+        console.log("adding the next num");
+        displayValue += num;
+        display.textContent = displayValue;
+    }
+    
 
 }
 

@@ -22,6 +22,8 @@ function divide(num1, num2){
 
 //Operator
 function operate(operator, num1, num2){
+    console.log("operating");
+    console.log("V1: ", valueOne, " V2: ", valueTwo, " DV: ", displayValue, " OP1: ", operationValue, " OP2: ", operationValue2);
     let result = null;
     num1 = Number(num1);
     num2 = Number(num2);
@@ -39,8 +41,9 @@ function operate(operator, num1, num2){
             result = divide(num1,num2);
             break;
     }
-    console.log(result);
-    return result;
+    console.log("result is: ", result);
+    resultAsString = result.toString();
+    return resultAsString;
 }
 
 // console.log(operate('+', 10, 2));
@@ -54,52 +57,105 @@ let displayValue = '0';
 let valueOne = 0;
 let valueTwo = 0;
 let operationValue = "0";
+let operationValue2 = "0";
 
 function displayUpdate(e){
     let num = e.target.innerHTML;
     console.log(num);
     let display = document.getElementById('display');
-    console.log(display);
-    if(operationValue !== '0'){
-        displayValue += num;
-        display.textContent = displayValue;
-        console.log("operating!")
+    if((operationValue !== '0') && (operationValue2 !== '0')){
+        console.log("Case 4: operating!")
         displayValue = operate(operationValue, valueOne, displayValue);
         display.textContent = displayValue;
+        //scootch all values over to reset
+        valueOne = displayValue;
+        valueTwo = '0';
+        // if(operationValue2 === '='){
+        //     operationValue = '0';
+        // }
+        // else {
+        //     operationValue =  operationValue2;
+        // }
+        operationValue2 = '0';
+        displayValue = '';
+        console.log("V1: ", valueOne, " V2: ", valueTwo, " DV: ", displayValue, " OP1: ", operationValue, " OP2: ", operationValue2);
+        // if(operationValue2 === '='){
+        //     console.log('entered the proper if!');
+        //     operationValue = '0';
+        // }
     }
-    else {
-        if(displayValue === '0'){
-            console.log("replacing 0");
-            displayValue = num;
-            display.textContent = displayValue;
-            return
-        }
-        {
-            console.log("adding the next num");
-            displayValue += num;
-            display.textContent = displayValue;
-        }
+    else if (operationValue !== '0') {
+        console.log("Case 3: Adding new next value numbers")
+        displayValue += num;
+        display.textContent = displayValue;
+        
     }
-
-    
+        else {
+            if(displayValue === '0'){
+                console.log("Case 1: Adding new numbers")
+                displayValue = num;
+                display.textContent = displayValue;
+                console.log("display value is ", displayValue, ". Done.");
+                return
+            }
+            {
+                console.log("Case 2: Adding on numbers")
+                displayValue += num;
+                display.textContent = displayValue;
+                console.log("display value is ", displayValue, ". Done.");
+            }
+        }
 }
 
 function storeFirstSet(e){
-    console.log("storing!")
-    valueOne = displayValue;
-    operationValue = e.target.innerHTML;
-    console.log(operationValue);
-    displayValue = "";
+    if (operationValue === '0'){
+        valueOne = displayValue;
+        operationValue = e.target.innerHTML;
+        displayValue = "";
+        console.log("display value is ", displayValue);
+        console.log("operationValue is ", operationValue);
+        console.log("valueOne ", valueOne);
+        // display.textContent = displayValue;
+    }
+    else {
+        console.log("elsing!")
+        valueTwo = displayValue;
+        operationValue2 = e.target.innerHTML;
+        console.log(operationValue2);
+        displayUpdate(e);
+    }
+}
+
+function clearAll(e){
+    displayValue = '0';
+    valueOne = 0;
+    valueTwo = 0;
+    operationValue = '0';
+    operationValue2 = '0';
     display.textContent = displayValue;
+}
+
+function equals(e){
+    displayValue = operate(operationValue, valueOne, displayValue);
+    display.textContent = displayValue;
+    operationValue2 = '0';
+    console.log("V1: ", valueOne, " V2: ", valueTwo, " DV: ", displayValue, " OP1: ", operationValue, " OP2: ", operationValue2);
+    displayValue = '';
+    valueOne = displayValue;
 }
 
 function addListeners(){
     const divs = document.querySelectorAll('.numbers'); 
-    console.log(divs);
     divs.forEach(div => div.addEventListener('click', displayUpdate));
 
     const ops = document.querySelectorAll('.rightOperators');
     ops.forEach(op => op.addEventListener('click', storeFirstSet));
+
+    const clearButton = document.querySelector('.clear');
+    clearButton.addEventListener('click', clearAll);
+
+    const equalButton = document.querySelector('.equals');
+    equalButton.addEventListener('click', equals);
 }
 
 addListeners();

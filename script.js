@@ -76,6 +76,7 @@ function displayUpdate(e){
             }
             {
                 //Case 2: Adding on digits
+                
                 displayValue += num;
                 display.textContent = displayValue;
                 
@@ -110,9 +111,22 @@ function clearAll(e){
     display.textContent = displayValue;
 }
 
+function decimalAdder(e){
+    let num = displayValue;
+    if (num.includes('.')){
+        return
+    }
+    else {
+        displayUpdate(e);
+    }
+}
+
 function addListeners(){
     const divs = document.querySelectorAll('.numbers'); 
     divs.forEach(div => div.addEventListener('click', displayUpdate));
+
+    const decimal = document.querySelector('.decimal');
+    decimal.addEventListener('click', decimalAdder)
 
     const ops = document.querySelectorAll('.rightOperators');
     ops.forEach(op => op.addEventListener('click', storeNumAndOp));

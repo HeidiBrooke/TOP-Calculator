@@ -40,6 +40,8 @@ function operate(operator, num1, num2){
 }
 
 //initial Values
+let lastButtonPressed = '';
+let operators = ['+','-','/','*'];
 let displayValue = '0';
 let valueOne = 0;
 let valueTwo = 0;
@@ -48,7 +50,7 @@ let operationValue2 = "0";
 
 function displayUpdate(e){
     let num = e.target.innerHTML;
-    console.log(num);
+    console.log(typeof lastButtonPressed);
     let display = document.getElementById('display');
     if((operationValue !== '0') && (operationValue2 !== '0')){
         //Case 4: Operating
@@ -82,24 +84,37 @@ function displayUpdate(e){
                 
             }
         }
+        console.log(valueOne, valueTwo, displayValue, operationValue, operationValue2, lastButtonPressed);
 }
 
 function storeNumAndOp(e){
+    console.log("operators", operators);
+    console.log("lastbuttonpressed", lastButtonPressed);
+    if ((operators.includes(lastButtonPressed)) && (operators.includes(e.target.innerHTML))){
+        console.log("pressed same button twice");
+        operationValue = e.target.innerHTML;
+        console.log(valueOne, valueTwo, displayValue, operationValue, operationValue2, lastButtonPressed);
+        return
+        }
     if (operationValue === '0'){
         valueOne = displayValue;
         operationValue = e.target.innerHTML;
         displayValue = "";
+        lastButtonPressed = e.target.innerHTML;
+        
     }
     else if (operationValue === '='){
         operationValue = e.target.innerHTML;
         valueTwo = displayValue;
         displayValue = "";
-    }
-    else {
-        valueTwo = displayValue;
-        operationValue2 = e.target.innerHTML;
-        displayUpdate(e);
-    }
+        lastButtonPressed = e.target.innerHTML;
+        }
+        else {
+            valueTwo = displayValue;
+            operationValue2 = e.target.innerHTML;
+            lastButtonPressed = e.target.innerHTML;
+            displayUpdate(e);
+                }
 }
 
 function clearAll(e){

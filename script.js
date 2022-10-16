@@ -145,6 +145,15 @@ function decimalAdder(e){
     }
 }
 
+function backSpace(e){
+    console.log("backbutton pressed!")
+    if (justOperated === true){
+        return
+    }
+    displayValue = displayValue.substring(0, displayValue.length-1);
+    display.textContent = displayValue;
+}
+
 function addListeners(){
     const divs = document.querySelectorAll('.numbers'); 
     divs.forEach(div => div.addEventListener('click', displayUpdate));
@@ -160,6 +169,9 @@ function addListeners(){
 
     const equalButton = document.querySelector('.equals');
     equalButton.addEventListener('click', storeNumAndOp);
+
+    const backButton = document.querySelector('.backspace');
+    backButton.addEventListener('click', backSpace);
 }
 
 addListeners();

@@ -42,6 +42,7 @@ function operate(operator, num1, num2){
 //initial Values
 let lastButtonPressed = '';
 let operators = ['+','-','/','*'];
+let justOperated = false;
 let displayValue = '0';
 let valueOne = 0;
 let valueTwo = 0;
@@ -55,6 +56,7 @@ function displayUpdate(e){
     if((operationValue !== '0') && (operationValue2 !== '0')){
         //Case 4: Operating
         displayValue = operate(operationValue, valueOne, displayValue);
+        justOperated = true;
         display.textContent = displayValue;
         //scootch all values over to reset
         valueOne = displayValue;
@@ -67,6 +69,7 @@ function displayUpdate(e){
         //Case 3: Adding second value
         displayValue += num;
         display.textContent = displayValue;
+        justOperated = false;
         
     }
         else {
@@ -74,6 +77,7 @@ function displayUpdate(e){
                 //Case 1: Adding first value
                 displayValue = num;
                 display.textContent = displayValue;
+                justOperated = false;
                 return
             }
             {
@@ -81,6 +85,7 @@ function displayUpdate(e){
                 
                 displayValue += num;
                 display.textContent = displayValue;
+                justOperated = false;
                 
             }
         }
@@ -124,9 +129,13 @@ function clearAll(e){
     operationValue = '0';
     operationValue2 = '0';
     display.textContent = displayValue;
+    justOperated = false;
 }
 
 function decimalAdder(e){
+    if(justOperated === true){
+        return
+    }
     let num = displayValue;
     if (num.includes('.')){
         return

@@ -50,8 +50,8 @@ let operationValue = "0";
 let operationValue2 = "0";
 
 function displayUpdate(e){
+    removeRipple(); 
     let num = e.target.innerHTML;
-    console.log(typeof lastButtonPressed);
     let display = document.getElementById('display');
     if((operationValue !== '0') && (operationValue2 !== '0')){
         //Case 4: Operating
@@ -80,27 +80,27 @@ function displayUpdate(e){
                 justOperated = false;
                 return
             }
-            {
-                //Case 2: Adding on digits
-                
+            {   //Case 2: Adding on digits
+        
                 displayValue += num;
                 display.textContent = displayValue;
                 justOperated = false;
                 
             }
         }
-        console.log(valueOne, valueTwo, displayValue, operationValue, operationValue2, lastButtonPressed);
+           
+        
 }
 
 function storeNumAndOp(e){
-    console.log("operators", operators);
-    console.log("lastbuttonpressed", lastButtonPressed);
-    if ((operators.includes(lastButtonPressed)) && (operators.includes(e.target.innerHTML))){
-        console.log("pressed same button twice");
+    removeRipple();  
+    //pressed same button twice - do nothing
+    if ((operators.includes(lastButtonPressed)) && 
+        (operators.includes(e.target.innerHTML))){
         operationValue = e.target.innerHTML;
-        console.log(valueOne, valueTwo, displayValue, operationValue, operationValue2, lastButtonPressed);
         return
         }
+    //fresh slate
     if (operationValue === '0'){
         valueOne = displayValue;
         operationValue = e.target.innerHTML;
@@ -108,12 +108,16 @@ function storeNumAndOp(e){
         lastButtonPressed = e.target.innerHTML;
         
     }
+    //pressed =
     else if (operationValue === '='){
         operationValue = e.target.innerHTML;
         valueTwo = displayValue;
         displayValue = "";
         lastButtonPressed = e.target.innerHTML;
         }
+        //second operator pressed
+        //execute the first(old) operation
+        //store event as the new 1st operator
         else {
             valueTwo = displayValue;
             operationValue2 = e.target.innerHTML;
@@ -146,7 +150,6 @@ function decimalAdder(e){
 }
 
 function backSpace(e){
-    console.log("backbutton pressed!")
     if (justOperated === true){
         return
     }
@@ -157,21 +160,51 @@ function backSpace(e){
 function addListeners(){
     const divs = document.querySelectorAll('.numbers'); 
     divs.forEach(div => div.addEventListener('click', displayUpdate));
+    divs.forEach(div => div.addEventListener('click', createRipple));
 
     const decimal = document.querySelector('.decimal');
-    decimal.addEventListener('click', decimalAdder)
+    decimal.addEventListener('click', decimalAdder);
+    decimal.addEventListener('click', createRipple);
 
     const ops = document.querySelectorAll('.rightOperators');
     ops.forEach(op => op.addEventListener('click', storeNumAndOp));
+    ops.forEach(op => op.addEventListener('click', createRipple));
 
     const clearButton = document.querySelector('.clear');
     clearButton.addEventListener('click', clearAll);
+    clearButton.addEventListener('click', createRipple);
 
     const equalButton = document.querySelector('.equals');
     equalButton.addEventListener('click', storeNumAndOp);
+    equalButton.addEventListener('click', createRipple);
 
     const backButton = document.querySelector('.backspace');
     backButton.addEventListener('click', backSpace);
+    backButton.addEventListener('click', createRipple);
 }
 
 addListeners();
+
+//ripple button effect
+function createRipple(event) {
+    const button = event.currentTarget;
+    const circle = document.createElement("span");
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - (button.offsetLeft + radius)}px`;
+    circle.style.top = `${event.clientY - (button.offsetTop + radius)}px`;
+    circle.classList.add("ripple"); 
+    const ripple = button.getElementsByClassName("ripple")[0];
+    if (ripple) {
+        ripple.remove();
+    }
+    button.appendChild(circle);
+  }
+
+  function removeRipple(){
+    const items = document.querySelectorAll("span.ripple");
+    for (let item of items) {
+         item.remove();
+    }
+  }

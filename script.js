@@ -52,6 +52,7 @@ let operationValue2 = "0";
 function displayUpdate(e){
     removeRipple(); 
     let num = e.target.innerHTML;
+    lastButtonPressed = num;
     let display = document.getElementById('display');
     if((operationValue !== '0') && (operationValue2 !== '0')){
         //Case 4: Operating
@@ -98,6 +99,9 @@ function storeNumAndOp(e){
     if ((operators.includes(lastButtonPressed)) && 
         (operators.includes(e.target.innerHTML))){
         operationValue = e.target.innerHTML;
+        console.log(lastButtonPressed);
+        console.log(valueOne, valueTwo, operationValue, operationValue2, displayValue);
+        console.log("I think I pressed the same button")
         return
         }
     //fresh slate

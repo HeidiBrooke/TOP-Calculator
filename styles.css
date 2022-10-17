@@ -39,11 +39,13 @@ body{
     /* margin: 4px; */
     padding: 8px;
     justify-content: right;
-    background-color: rgb(173, 206, 235);e;
+    background-color: rgb(173, 206, 235);
+    background-color: white;
+    font-size: 32px;
     /* width: 400px; */
     width: 100%;
     height: 15%;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3); */
 }
 
 .mainButtons{
@@ -73,7 +75,8 @@ body{
     border-radius: 12px;
     /* border-left: solid grey 2px;
     border-bottom: solid grey 2px; */
-    background-color: peachpuff;
+    background-color: #6200ee;
+    /* background-color: peachpuff; */
     /* border-right: solid grey 1px;
     border-top: solid grey 1px; */
     width: 90px;
@@ -83,7 +86,7 @@ body{
     justify-content: center;
     /* margin: 2px; */
     border-radius: 12px;
-    background-color: rgb(173, 206, 235);
+    background-color: rgb(235, 92, 16);
     /* width: 25% */
     width: 90px;
     height: 90px;
@@ -99,7 +102,7 @@ body{
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    background-color: pink;
+    background-color: rgb(255, 71, 102);
     /* width: 100%;
     height: 100%; */
     width: 90px;
@@ -113,7 +116,7 @@ body{
     width: 50%;
     height: 100%;
     border-radius: 8px;
-    background-color: rgb(184, 210, 202);
+    background-color: rgb(1, 213, 167);
     /* width: 200px; */
 }
 
@@ -122,10 +125,12 @@ body{
     height: 15%;
 }
 .title{
-    color:rgb(78, 137, 189);
+    /* color:rgb(78, 137, 189); */
+    color: #6200ee;
     font-weight: bold;
     font-size: 42px;
     font-family: 'Roboto', sans-serif;
+    margin-bottom: 24px;
 }
 
 /* button animation */
@@ -136,7 +141,7 @@ body{
     overflow: hidden;
     transition: background 400ms;
     color: #fff;
-    background-color: #6200ee;
+    /* background-color: #6200ee; */
     padding: 1rem 2rem;
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
